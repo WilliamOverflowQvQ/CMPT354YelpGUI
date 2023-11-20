@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<GridPane fx:controller="com.williamoverflow.cmpt354yelpgui.LoginViewController"
+          xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10">
+
+    <Text text="Login" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+
+    <Label text="URL:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <TextField fx:id="urlField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label text="Database Name:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <TextField fx:id="dbNameField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <CheckBox fx:id="encryptCheckBox" text="Encrypt Connection" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+    <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="6">
+        <Button fx:id="connectBtn" text="Connect" onMouseClicked="#onConnectClicked"/>
+    </HBox>
+
+</GridPane>
