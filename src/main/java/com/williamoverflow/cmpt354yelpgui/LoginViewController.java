@@ -1,10 +1,7 @@
 package com.williamoverflow.cmpt354yelpgui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
 
@@ -26,7 +23,12 @@ public class LoginViewController {
     private CheckBox encryptCheckBox;
 
     @FXML
+    public Label logininfoArea;
+
+    @FXML
     private void initialize() {
+
+
         // Set default values for login controls
         urlField.setText("cypress.csil.sfu.ca");
         usernameField.setText("s_zza198");
@@ -47,9 +49,38 @@ public class LoginViewController {
             );
             YelpDBHelper.ydbh.connect();
             YelpDBHelper.UserYelp user = YelpDBHelper.ydbh.getUserYelpById("__hr-GtD9qh8_sYSGTRqXw");
-            System.out.println(user.toString());
+
+            String loginSucceed = "";
+            loginSucceed += "LOGIN SUCCEED\n";
+            loginSucceed += "Login as: " + YelpDBHelper.ydbh.username + "\n";
+            loginSucceed += "On DB: " + YelpDBHelper.ydbh.dbname + "\n";
+            loginSucceed += "Proceed to DB-viewer ...";
+            logininfoArea.setText(loginSucceed);
         }catch (SQLException ex){
             System.out.println(ex);
+            String loginFailed = "";
+
+
+            int code = ex.getErrorCode();
+            switch(code){
+                case(0):
+                    loginFailed += "Expected error code 0:\n";
+                    loginFailed += "This is a jdbc driver error.\n";
+                    loginFailed += "Plz make sure you have ssl connection permissions, ";
+                    loginFailed += "otherwise do not check the encrypted connection. ";
+                    loginFailed += "You may also exam your login info is correct.\n\n";
+                    break;
+                case(18456):
+                    loginFailed += "Expected error code 18456:\n";
+                    loginFailed += "This is a login account error.\n";
+                    loginFailed += "Your account or password is wrong\n\n";
+                    loginFailed += ex.toString();
+                default:
+                    loginFailed += "Encountered an unexpected error:\n";
+                    loginFailed += ex.toString();
+                    break;
+            }
+            logininfoArea.setText(loginFailed);
         }
     }
 }

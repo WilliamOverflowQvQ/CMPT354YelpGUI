@@ -8,11 +8,11 @@ public class YelpDBHelper {
     public static YelpDBHelper ydbh;
 
 
-    private String url;
-    private String username;
+    public String url;
+    public String username;
     private String password;
-    private String dbname;
-    private boolean encrypt = false;
+    public String dbname;
+    public boolean encrypt = false;
     public Connection connection;
 
 
@@ -55,7 +55,7 @@ public class YelpDBHelper {
 
     public void connect() throws SQLException {
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  // for db driver set up DO NOT TOUCH
             if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(getConnStr());
                 // ...
@@ -82,7 +82,7 @@ public class YelpDBHelper {
             if (resultSet.next()) {
                 return mapResultSetToUserYelp(resultSet);
             } else {
-                return null; // 或者抛出一个异常，取决于你的需求
+                return null;
             }
         }
     }
