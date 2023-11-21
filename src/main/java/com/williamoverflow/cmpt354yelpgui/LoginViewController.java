@@ -1,5 +1,6 @@
 package com.williamoverflow.cmpt354yelpgui;
 
+import com.williamoverflow.cmpt354yelpgui.entities.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -9,8 +10,6 @@ import java.sql.SQLException;
 
 
 public class LoginViewController {
-    @FXML
-    public Button connectBtn;
     @FXML
     public TextField urlField;
     @FXML
@@ -25,7 +24,11 @@ public class LoginViewController {
     public CheckBox encryptCheckBox;
 
     @FXML
-    public Label logininfoArea;
+    public Label infoArea;
+    @FXML
+    public Button connectBtn;
+    @FXML
+    public Button loginBtn;
 
     @FXML
     private void initialize() {
@@ -50,39 +53,38 @@ public class LoginViewController {
                     encryptCheckBox.isSelected()
             );
             YelpDBHelper.ydbh.connect();
-            YelpDBHelper.UserYelp user = YelpDBHelper.ydbh.getUserYelpById("__hr-GtD9qh8_sYSGTRqXw");
 
-            String loginSucceed = "";
-            loginSucceed += "LOGIN SUCCEED\n";
-            loginSucceed += "Login as: " + YelpDBHelper.ydbh.username + "\n";
-            loginSucceed += "On DB: " + YelpDBHelper.ydbh.dbname + "\n";
-            loginSucceed += "Proceed to DB-viewer ...";
-            logininfoArea.setText(loginSucceed);
+            String connectSucceed = "";
+            connectSucceed += "CONNECT SUCCESSFUL!\n";
+            connectSucceed += "Connected as: " + YelpDBHelper.ydbh.username + "\n";
+            connectSucceed += "On DB: " + YelpDBHelper.ydbh.dbname + "\n";
+            connectSucceed += "Login to use DB-viewer ...";
+            infoArea.setText(connectSucceed);
         }catch (SQLException ex) {
             System.out.println(ex);
-            String loginFailed = "";
+            String connectFailed = "";
 
 
             int code = ex.getErrorCode();
             switch (code) {
                 case (0):
-                    loginFailed += "Expected error code 0:\n";
-                    loginFailed += "This is a jdbc driver error.\n";
-                    loginFailed += "Plz make sure you have ssl connection permissions, ";
-                    loginFailed += "otherwise do not check the encrypted connection. ";
-                    loginFailed += "You may also exam your login info is correct.\n\n";
+                    connectFailed += "Expected error code 0:\n";
+                    connectFailed += "This is a jdbc driver error.\n";
+                    connectFailed += "Plz make sure you have ssl connection permissions, ";
+                    connectFailed += "otherwise do not check the encrypted connection. ";
+                    connectFailed += "You may also exam your login info is correct.\n\n";
                     break;
                 case (18456):
-                    loginFailed += "Expected error code 18456:\n";
-                    loginFailed += "This is a login account error.\n";
-                    loginFailed += "Your account or password is wrong\n\n";
-                    loginFailed += ex.toString();
+                    connectFailed += "Expected error code 18456:\n";
+                    connectFailed += "This is a login account error.\n";
+                    connectFailed += "Your account or password is wrong\n\n";
+                    connectFailed += ex.toString();
                 default:
-                    loginFailed += "Encountered an unexpected error:\n";
-                    loginFailed += ex.toString();
+                    connectFailed += "Encountered an unexpected error:\n";
+                    connectFailed += ex.toString();
                     break;
             }
-            logininfoArea.setText(loginFailed);
+            infoArea.setText(connectFailed);
         }catch(ClassNotFoundException ex){
             System.err.println("WARNING: JDBC for sql server DNE!");
             System.err.println(ex);
@@ -90,6 +92,43 @@ public class LoginViewController {
             internalError += "WARNING: JDBC for sql server DNE, this may be an error during compiling\n";
             internalError += " or you are using this application incorrectly...\n\n";
             internalError += ex.toString();
+        }
+    }
+
+    @FXML
+    protected void onLoginClicked(){
+        if(YelpDBHelper.ydbh.isClosed()){
+            infoArea.setText("ERROR: You need to connect to a DB first!");
+            return;
+        }
+        if(sceneuserField.getText().isEmpty()){
+            infoArea.setText("WARNING: Scene user field is empty!");
+        }
+        try {
+            YelpDBHelper.ydbh.sceneUser = null;
+            YelpUser sceneUser = YelpDBHelper.ydbh.getUserYelpByName(sceneuserField.getText());
+            YelpDBHelper.ydbh.sceneUser = sceneUser;
+
+            if(sceneUser != null) {
+                String loginSuccessful = "";
+                loginSuccessful += "LOGIN SUCCESSFUL!\n";
+                loginSuccessful += "You are now login in as: " + YelpDBHelper.ydbh.sceneUser.name + "\n\n";
+
+                loginSuccessful += "CONNECT SUCCESSFUL!\n";
+                loginSuccessful += "Connected as: " + YelpDBHelper.ydbh.username + "\n";
+                loginSuccessful += "On DB: " + YelpDBHelper.ydbh.dbname + "\n";
+                loginSuccessful += "Proceed to DB-viewer ...\n\n";
+                infoArea.setText(loginSuccessful);
+            }else{
+                String loginFailed = "";
+                loginFailed += "ERROR: The scene user you entered do not exist!\n\n";
+                infoArea.setText(loginFailed);
+            }
+        }catch (SQLException ex){
+            String loginFailed = "";
+            loginFailed += "ERROR: encountered an sql error!\n";
+            loginFailed += ex.toString();
+            infoArea.setText(loginFailed);
         }
     }
 }

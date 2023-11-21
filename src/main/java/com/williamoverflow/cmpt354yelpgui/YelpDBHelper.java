@@ -1,20 +1,23 @@
 package com.williamoverflow.cmpt354yelpgui;
 
+import com.williamoverflow.cmpt354yelpgui.entities.*;
+
 import java.sql.*;
 
 
 
 public class YelpDBHelper {
-    public static YelpDBHelper ydbh;
+    public static YelpDBHelper ydbh = new YelpDBHelper();
 
 
-    public String url;
-    public String username;
-    private String password;
-    public String dbname;
+    public String url = "";
+    public String username = "";
+    private String password = "";
+    public String dbname = "";
     public boolean encrypt = false;
-    public Connection connection;
+    public Connection connection = null;
 
+    public YelpUser sceneUser = null;
 
     // full
     public YelpDBHelper(String url, String username, String password, String dbname, boolean encrypt) {
@@ -69,7 +72,7 @@ public class YelpDBHelper {
         }
     }
 
-    public UserYelp getUserYelpById(String userId) throws SQLException {
+    public YelpUser getUserYelpById(String userId) throws SQLException {
         String sql = "SELECT * FROM user_yelp WHERE user_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, userId);
@@ -83,7 +86,21 @@ public class YelpDBHelper {
         }
     }
 
-    private UserYelp mapResultSetToUserYelp(ResultSet resultSet) throws SQLException {
+    public YelpUser getUserYelpByName(String name) throws SQLException {
+        String sql = "SELECT * FROM user_yelp WHERE name = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return mapResultSetToUserYelp(resultSet);
+            } else {
+                return null;
+            }
+        }
+    }
+
+    private YelpUser mapResultSetToUserYelp(ResultSet resultSet) throws SQLException {
         String user_id = resultSet.getString("user_id");
         String name = resultSet.getString("name");
         int review_count = resultSet.getInt("review_count");
@@ -94,32 +111,9 @@ public class YelpDBHelper {
         int fans = resultSet.getInt("fans");
         double average_stars = resultSet.getDouble("average_stars");
 
-        return new UserYelp(user_id, name, review_count, yelping_since, useful, funny, cool, fans, average_stars);
+        return new YelpUser(user_id, name, review_count, yelping_since, useful, funny, cool, fans, average_stars);
     }
 
-    public class UserYelp {
-        public String userId;
-        public String name;
-        public int reviewCount;
-        public Timestamp yelpingSince;
-        public int useful;
-        public int funny;
-        public int cool;
-        public int fans;
-        public double averageStars;
-
-        public UserYelp(String userId, String name, int reviewCount, Timestamp yelpingSince, int useful, int funny, int cool, int fans, double averageStars){
-            this.userId = userId;
-            this.name = name;
-            this.reviewCount = reviewCount;
-            this.yelpingSince = yelpingSince;
-            this.useful = useful;
-            this.funny = funny;
-            this.cool = cool;
-            this.fans = fans;
-            this.averageStars = averageStars;
-        }
-    }
 
 
 }
