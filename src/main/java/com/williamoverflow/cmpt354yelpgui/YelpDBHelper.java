@@ -1,6 +1,6 @@
 package com.williamoverflow.cmpt354yelpgui;
 
-import com.williamoverflow.cmpt354yelpgui.entities.*;
+import com.williamoverflow.cmpt354yelpgui.entities.YelpUser;
 
 import java.sql.*;
 
@@ -58,12 +58,10 @@ public class YelpDBHelper {
 
     public void connect() throws SQLException, ClassNotFoundException{
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  // for db driver set up DO NOT TOUCH
-
         if (isClosed()) {
             connection = DriverManager.getConnection(getConnStr());
             // ...
         }
-
     }
 
     public void close() throws SQLException {
@@ -79,7 +77,7 @@ public class YelpDBHelper {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                return mapResultSetToUserYelp(resultSet);
+                return YelpUser.map(resultSet);
             } else {
                 return null;
             }
@@ -93,26 +91,13 @@ public class YelpDBHelper {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                return mapResultSetToUserYelp(resultSet);
+                return YelpUser.map(resultSet);
             } else {
                 return null;
             }
         }
     }
 
-    private YelpUser mapResultSetToUserYelp(ResultSet resultSet) throws SQLException {
-        String user_id = resultSet.getString("user_id");
-        String name = resultSet.getString("name");
-        int review_count = resultSet.getInt("review_count");
-        Timestamp yelping_since = resultSet.getTimestamp("yelping_since");
-        int useful = resultSet.getInt("useful");
-        int funny = resultSet.getInt("funny");
-        int cool = resultSet.getInt("cool");
-        int fans = resultSet.getInt("fans");
-        double average_stars = resultSet.getDouble("average_stars");
-
-        return new YelpUser(user_id, name, review_count, yelping_since, useful, funny, cool, fans, average_stars);
-    }
 
 
 

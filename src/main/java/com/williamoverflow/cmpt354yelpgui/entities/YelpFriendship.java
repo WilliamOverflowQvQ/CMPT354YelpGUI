@@ -1,4 +1,6 @@
 package com.williamoverflow.cmpt354yelpgui.entities;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class YelpFriendship {
     // Fields corresponding to the table columns
@@ -16,4 +18,14 @@ public class YelpFriendship {
 
     // Optionally, you can also override toString, equals, and hashCode methods
     // ...
+    public static YelpFriendship map(ResultSet rs) throws SQLException {
+        if (rs == null) {
+            return null;
+        }
+
+        String user_id = rs.getString("user_id");
+        String friend = rs.getString("friend");
+
+        return new YelpFriendship(user_id, friend);
+    }
 }

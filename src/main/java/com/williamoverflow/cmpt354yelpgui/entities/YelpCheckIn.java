@@ -1,4 +1,7 @@
 package com.williamoverflow.cmpt354yelpgui.entities;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import java.util.Date;
 
 public class YelpCheckIn {
@@ -19,4 +22,17 @@ public class YelpCheckIn {
 
     // Optionally, you can also override toString, equals, and hashCode methods
     // ...
+
+
+    public static YelpCheckIn map(ResultSet rs) throws SQLException {
+        if (rs == null) {
+            return null;
+        }
+
+        int checkin_id = rs.getInt("checkin_id");
+        String business_id = rs.getString("business_id");
+        Date date = rs.getTimestamp("date"); // Assuming 'date' is stored as a timestamp in your database
+
+        return new YelpCheckIn(checkin_id, business_id, date);
+    }
 }
