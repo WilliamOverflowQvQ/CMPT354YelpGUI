@@ -12,15 +12,17 @@ public class LoginViewController {
     @FXML
     public Button connectBtn;
     @FXML
-    private TextField urlField;
+    public TextField urlField;
     @FXML
-    private TextField usernameField;
+    public TextField usernameField;
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
     @FXML
-    private TextField dbNameField;
+    public TextField dbNameField;
     @FXML
-    private CheckBox encryptCheckBox;
+    public TextField sceneuserField;
+    @FXML
+    public CheckBox encryptCheckBox;
 
     @FXML
     public Label logininfoArea;
@@ -56,21 +58,21 @@ public class LoginViewController {
             loginSucceed += "On DB: " + YelpDBHelper.ydbh.dbname + "\n";
             loginSucceed += "Proceed to DB-viewer ...";
             logininfoArea.setText(loginSucceed);
-        }catch (SQLException ex){
+        }catch (SQLException ex) {
             System.out.println(ex);
             String loginFailed = "";
 
 
             int code = ex.getErrorCode();
-            switch(code){
-                case(0):
+            switch (code) {
+                case (0):
                     loginFailed += "Expected error code 0:\n";
                     loginFailed += "This is a jdbc driver error.\n";
                     loginFailed += "Plz make sure you have ssl connection permissions, ";
                     loginFailed += "otherwise do not check the encrypted connection. ";
                     loginFailed += "You may also exam your login info is correct.\n\n";
                     break;
-                case(18456):
+                case (18456):
                     loginFailed += "Expected error code 18456:\n";
                     loginFailed += "This is a login account error.\n";
                     loginFailed += "Your account or password is wrong\n\n";
@@ -81,6 +83,13 @@ public class LoginViewController {
                     break;
             }
             logininfoArea.setText(loginFailed);
+        }catch(ClassNotFoundException ex){
+            System.err.println("WARNING: JDBC for sql server DNE!");
+            System.err.println(ex);
+            String internalError = "";
+            internalError += "WARNING: JDBC for sql server DNE, this may be an error during compiling\n";
+            internalError += " or you are using this application incorrectly...\n\n";
+            internalError += ex.toString();
         }
     }
 }

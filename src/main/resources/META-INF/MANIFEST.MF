@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Main-Class: com.williamoverflow.cmpt354yelpgui.Main
+Class-Path: ikonli-javafx-12.2.0.jar javafx-base-18-ea+6-win.jar ikonli-
+ core-12.2.0.jar controlsfx-11.1.0.jar javafx-graphics-18-ea+6.jar javaf
+ x-controls-18-ea+6-win.jar javafx-fxml-18-ea+6-win.jar mssql-jdbc-11.2.
+ 3.jre18.jar formsfx-core-11.3.2.jar javafx-base-18-ea+6.jar javafx-fxml
+ -18-ea+6.jar javafx-graphics-18-ea+6-win.jar javafx-controls-18-ea+6.ja
+ r
+

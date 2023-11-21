@@ -35,7 +35,7 @@ public class YelpDBHelper {
 
     public boolean isClosed(){
         try {
-            return connection.isClosed();
+            return connection == null || connection.isClosed();
         }catch (SQLException ex){
             System.err.println(ex);
             return true;
@@ -53,22 +53,18 @@ public class YelpDBHelper {
         return result;
     }
 
-    public void connect() throws SQLException {
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  // for db driver set up DO NOT TOUCH
-            if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection(getConnStr());
-                // ...
-            }
-        }catch (ClassNotFoundException ex){
-            System.err.println("WZE: JDBC for sql server DNE!");
-            System.err.println(ex);
-            return;
+    public void connect() throws SQLException, ClassNotFoundException{
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  // for db driver set up DO NOT TOUCH
+
+        if (isClosed()) {
+            connection = DriverManager.getConnection(getConnStr());
+            // ...
         }
+
     }
 
     public void close() throws SQLException {
-        if (connection != null && !connection.isClosed()) {
+        if (isClosed()) {
             connection.close();
         }
     }

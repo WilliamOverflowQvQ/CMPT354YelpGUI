@@ -15,17 +15,20 @@
 
             <Text text="Login" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
 
-            <Label text="URL:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="DB URL:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <TextField fx:id="urlField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-            <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label text="DB Username:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-            <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label text="DB Password:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
             <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
             <Label text="DB Name:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
             <TextField fx:id="dbNameField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+            <Label text="Scene User" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <TextField fx:id="sceneuserField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
             <CheckBox fx:id="encryptCheckBox" text="Encrypt Connection" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
