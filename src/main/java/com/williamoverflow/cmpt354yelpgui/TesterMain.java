@@ -7,17 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
-
-public class MainApplication extends Application {
+public class TesterMain extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         FXMLLoader fxmlLoader = null;
-        fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
+        fxmlLoader = new FXMLLoader(MainApplication.class.getResource("dbviewer-view.fxml"));
         Scene scene1 = new Scene(fxmlLoader.load());
 
-        scene1.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         stage.setTitle("CMPT354 DB Management");
         stage.setScene(scene1);

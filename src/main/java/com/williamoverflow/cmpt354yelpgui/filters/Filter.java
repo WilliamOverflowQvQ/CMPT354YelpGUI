@@ -59,22 +59,27 @@ public class Filter {
 
         for (int i = 0; i < components.size(); i++) {
             Label fieldLbl = new Label(components.get(i).name);
-            TextField fieldTxt = new TextField();
-
-            upperGrid.add(fieldLbl, 1, i + 1);
-            upperGrid.add(fieldTxt, 2, i + 1);
+            TextField inputTxt = new TextField();
+            inputTxt.textProperty().bindBidirectional(components.get(i).userInput);
 
             CheckBox enabledCB = new CheckBox();
             enabledCB.setSelected(true);
+            enabledCB.selectedProperty().bindBidirectional(components.get(i).enabled);
+
             CheckBox reverseCB = new CheckBox();
             reverseCB.setTooltip(reverse_TT);
+            reverseCB.selectedProperty().bindBidirectional(components.get(i).reverse);
+
             CheckBox proxyCB = new CheckBox();
             proxyCB.setTooltip(proxy_TT);
+            proxyCB.selectedProperty().bindBidirectional(components.get(i).proxyMatch);
 
             if(!components.get(i).allowProxy)
                 proxyCB.setDisable(true);    // if disallow proxy, disable the button
 
             upperGrid.add(enabledCB, 0, i + 1);
+            upperGrid.add(fieldLbl, 1, i + 1);
+            upperGrid.add(inputTxt, 2, i + 1);
             upperGrid.add(reverseCB, 3, i + 1);
             upperGrid.add(proxyCB, 4, i + 1);
         }

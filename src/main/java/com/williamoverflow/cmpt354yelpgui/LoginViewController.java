@@ -143,14 +143,14 @@ public class LoginViewController {
 
     private void switchToDBViewer(){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("DBViewer-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("dbviewer-view.fxml"));
             Stage stage = (Stage) loginBtn.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
 
             stage.show();
         }catch (IOException ex){
-
+            System.err.println(ex);
         }
     }
 

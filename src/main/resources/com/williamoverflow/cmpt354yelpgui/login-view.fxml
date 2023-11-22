@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.geometry.Insets?>
-<GridPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.williamoverflow.cmpt354yelpgui.LoginViewController">
+<GridPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.williamoverflow.cmpt354yelpgui.LoginViewController">
     <HBox>
         <GridPane hgap="10" maxWidth="300.0" minWidth="240.0" vgap="10">
             <!--Left side-->
             <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
 
             <Text text="Login" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
@@ -33,14 +33,15 @@
             <CheckBox fx:id="encryptCheckBox" text="Encrypt Connection" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
             <HBox prefHeight="37.0" prefWidth="460.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                <Button fx:id="connectBtn" onMouseClicked="#onConnectClicked" text="Connect" minWidth="90"/>
-                <Button fx:id="loginBtn" onMouseClicked="#onLoginClicked" text="Login" minWidth="80"/>
+                <Button fx:id="connectBtn" minWidth="90" onMouseClicked="#onConnectClicked" text="Connect" />
+                <Button fx:id="loginBtn" minWidth="80" onMouseClicked="#onLoginClicked" text="Login" />
             </HBox>
          <columnConstraints>
-            <ColumnConstraints minWidth="100" hgrow="ALWAYS"/>
-            <ColumnConstraints minWidth="170" maxWidth="200" hgrow="SOMETIMES"/>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="100" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200" minWidth="170" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints />
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
@@ -56,9 +57,9 @@
         <GridPane>
             <!--Right Side-->
             <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
-            <Label fx:id="infoArea" text="login info" wrapText="true" prefWidth="220"/>
+            <Label fx:id="infoArea" prefWidth="220" text="login info" wrapText="true" />
          <columnConstraints>
             <ColumnConstraints />
          </columnConstraints>

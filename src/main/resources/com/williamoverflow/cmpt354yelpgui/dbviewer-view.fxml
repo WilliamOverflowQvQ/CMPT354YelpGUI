@@ -2,29 +2,21 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import org.controlsfx.control.tableview2.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600" prefWidth="850" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.williamoverflow.cmpt354yelpgui.DBViewerController">
-    <SplitPane dividerPositions="0.5102827763496144">
+<AnchorPane prefHeight="600" prefWidth="850" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.williamoverflow.cmpt354yelpgui.DBViewerController">
+    <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="600.0" prefWidth="516.0">
         <!-- Left Side: TabPane and Results Display -->
         <VBox>
             <!-- TabPane for Filter Methods -->
-            <TabPane fx:id="filterTabPane" prefHeight="200.0" prefWidth="200.0">
-                <Tab text="Filter 2">
-                </Tab>
-                <!-- Add more tabs as needed -->
+            <TabPane fx:id="filterTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabMaxHeight="0.0" tabMaxWidth="0.0">
+
             </TabPane>
 
-            <!-- Results Display Area -->
-            <TableView fx:id="resultView" editable="false">
-                <!-- This area will display the filter results -->
-
-            </TableView>
         </VBox>
 
         <!-- Right Side: Error Message Display -->
-        <AnchorPane prefWidth="600">
-            <TextArea fx:id="errorMessageArea" editable="false" layoutX="178.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+        <AnchorPane prefWidth="439.0">
+            <TextArea fx:id="errorMessageArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                 <!-- This area will display error messages -->
             </TextArea>
         </AnchorPane>
