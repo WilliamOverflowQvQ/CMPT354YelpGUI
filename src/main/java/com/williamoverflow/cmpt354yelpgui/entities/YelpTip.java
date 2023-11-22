@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import java.util.Date;
 
-public class YelpTip {
+public class YelpTip extends Entity{
     // Fields corresponding to the table columns
     private int tip_id;
     private String user_id;

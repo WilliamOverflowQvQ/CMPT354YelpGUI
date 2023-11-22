@@ -2,7 +2,7 @@ package com.williamoverflow.cmpt354yelpgui.entities;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class YelpBusiness {
+public class YelpBusiness extends Entity {
     // Fields corresponding to the table columns
     private String business_id;
     private String name;
@@ -29,7 +29,7 @@ public class YelpBusiness {
     // Optionally, you can also override toString, equals, and hashCode methods
     // ...
 
-    public static YelpBusiness mapResultSetToYelpBusiness(ResultSet rs) throws SQLException {
+    public static YelpBusiness map(ResultSet rs) throws SQLException {
         if (rs == null) {
             return null;
         }

@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class YelpUser {
+public class YelpUser extends Entity{
     public String user_id;
     public String name;
     public int reviewCount;
@@ -29,16 +29,19 @@ public class YelpUser {
     }
 
 
-    public static YelpUser map(ResultSet resultSet) throws SQLException {
-        String user_id = resultSet.getString("user_id");
-        String name = resultSet.getString("name");
-        int review_count = resultSet.getInt("review_count");
-        Timestamp yelping_since = resultSet.getTimestamp("yelping_since");
-        int useful = resultSet.getInt("useful");
-        int funny = resultSet.getInt("funny");
-        int cool = resultSet.getInt("cool");
-        int fans = resultSet.getInt("fans");
-        double average_stars = resultSet.getDouble("average_stars");
+    public static YelpUser map(ResultSet rs) throws SQLException {
+        if(rs == null){
+            return null;
+        }
+        String user_id = rs.getString("user_id");
+        String name = rs.getString("name");
+        int review_count = rs.getInt("review_count");
+        Timestamp yelping_since = rs.getTimestamp("yelping_since");
+        int useful = rs.getInt("useful");
+        int funny = rs.getInt("funny");
+        int cool = rs.getInt("cool");
+        int fans = rs.getInt("fans");
+        double average_stars = rs.getDouble("average_stars");
 
         return new YelpUser(user_id, name, review_count, yelping_since, useful, funny, cool, fans, average_stars);
     }

@@ -2,8 +2,13 @@ package com.williamoverflow.cmpt354yelpgui;
 
 import com.williamoverflow.cmpt354yelpgui.entities.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -119,6 +124,9 @@ public class LoginViewController {
                 loginSuccessful += "On DB: " + YelpDBHelper.ydbh.dbname + "\n";
                 loginSuccessful += "Proceed to DB-viewer ...\n\n";
                 infoArea.setText(loginSuccessful);
+
+
+                switchToDBViewer();
             }else{
                 String loginFailed = "";
                 loginFailed += "ERROR: The scene user you entered do not exist!\n\n";
@@ -131,4 +139,17 @@ public class LoginViewController {
             infoArea.setText(loginFailed);
         }
     }
+
+    private void switchToDBViewer(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("DBViewer-view.fxml"));
+            Stage stage = (Stage) loginBtn.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException ex){
+
+        }
+    }
+
 }

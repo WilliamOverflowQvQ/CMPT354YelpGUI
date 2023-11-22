@@ -10,4 +10,8 @@ module com.williamoverflow.cmpt354yelpgui {
 
     opens com.williamoverflow.cmpt354yelpgui to javafx.fxml;
     exports com.williamoverflow.cmpt354yelpgui;
+
+    exports com.williamoverflow.cmpt354yelpgui.entities;
+    exports com.williamoverflow.cmpt354yelpgui.filters;
+
 }

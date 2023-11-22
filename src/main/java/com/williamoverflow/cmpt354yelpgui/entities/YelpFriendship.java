@@ -2,7 +2,7 @@ package com.williamoverflow.cmpt354yelpgui.entities;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class YelpFriendship {
+public class YelpFriendship extends Entity{
     // Fields corresponding to the table columns
     private String user_id;
     private String friend;

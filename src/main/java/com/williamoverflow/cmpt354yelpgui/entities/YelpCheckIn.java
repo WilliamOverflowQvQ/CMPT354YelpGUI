@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import java.util.Date;
 
-public class YelpCheckIn {
+public class YelpCheckIn extends Entity{
     // Fields corresponding to the table columns
     private int checkin_id;
     private String business_id;
