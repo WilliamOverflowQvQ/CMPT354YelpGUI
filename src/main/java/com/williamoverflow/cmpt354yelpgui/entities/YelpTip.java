@@ -7,11 +7,11 @@ import java.util.Date;
 
 public class YelpTip extends Entity{
     // Fields corresponding to the table columns
-    private int tip_id;
-    private String user_id;
-    private String business_id;
-    private Date date;
-    private int compliment_count;
+    public int tip_id;
+    public String user_id;
+    public String business_id;
+    public Date date;
+    public int compliment_count;
 
     // Constructor
     public YelpTip(int tip_id, String user_id, String business_id, Date date, int compliment_count) {

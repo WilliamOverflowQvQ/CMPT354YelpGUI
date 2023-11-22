@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 public class YelpFriendship extends Entity{
     // Fields corresponding to the table columns
-    private String user_id;
-    private String friend;
+    public String user_id;
+    public String friend;
 
     // Constructor
     public YelpFriendship(String user_id, String friend) {

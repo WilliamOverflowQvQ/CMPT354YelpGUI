@@ -3,22 +3,78 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600" prefWidth="850" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.williamoverflow.cmpt354yelpgui.DBViewerController">
-    <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="600.0" prefWidth="516.0">
-        <!-- Left Side: TabPane and Results Display -->
-        <VBox>
-            <!-- TabPane for Filter Methods -->
-            <TabPane fx:id="filterTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabMaxHeight="0.0" tabMaxWidth="0.0">
+<?import org.controlsfx.control.tableview2.TableView2?>
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.williamoverflow.cmpt354yelpgui.DBViewerController">
+
+    <SplitPane dividerPositions="0.5" orientation="HORIZONTAL">
+        <SplitPane dividerPositions="0.5" maxWidth="350.0" minWidth="350.0" orientation="VERTICAL" prefWidth="350.0">
+            <TabPane fx:id="funcTabPane">
 
             </TabPane>
+            <AnchorPane>
+                <TextArea fx:id="finSqlStrTxt" prefHeight="320.0" prefWidth="300.0" />
+            </AnchorPane>
+        </SplitPane>
+        <SplitPane dividerPositions="0.5" maxWidth="850.0" minWidth="850.0" orientation="VERTICAL">
+            <SplitPane dividerPositions="0.5" orientation="HORIZONTAL">
+                <GridPane hgap="20" vgap="20">
+                    <TextArea editable="false" prefHeight="150.0" />
+                    <Button fx:id="applyBtn" prefWidth="90.0" text="APPLY" onMouseClicked="#onApplyClick" GridPane.rowIndex="1" />
+                    <Button fx:id="resetBtn" prefWidth="90.0" text="RESET" GridPane.rowIndex="2" />
+               <columnConstraints>
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
+               </rowConstraints>
 
-        </VBox>
+                </GridPane>
+                <AnchorPane>
+                    <TextArea fx:id="statTxt" editable="false" />
+                </AnchorPane>
+            </SplitPane>
 
-        <!-- Right Side: Error Message Display -->
-        <AnchorPane prefWidth="439.0">
-            <TextArea fx:id="errorMessageArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                <!-- This area will display error messages -->
-            </TextArea>
-        </AnchorPane>
+
+            <TableView fx:id="displayTableView">
+
+            </TableView>
+
+        </SplitPane>
+
+
     </SplitPane>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="600.0" prefWidth="516.0">-->
+<!--        &lt;!&ndash; Left Side: TabPane and Results Display &ndash;&gt;-->
+<!--        <VBox>-->
+<!--            &lt;!&ndash; TabPane for Filter Methods &ndash;&gt;-->
+<!--            <TabPane fx:id="filterTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabMaxHeight="0.0" tabMaxWidth="0.0">-->
+
+<!--            </TabPane>-->
+
+<!--        </VBox>-->
+
+<!--        &lt;!&ndash; Right Side: Error Message Display &ndash;&gt;-->
+<!--        <AnchorPane prefWidth="439.0">-->
+<!--            <TextArea fx:id="errorMessageArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">-->
+<!--                &lt;!&ndash; This area will display error messages &ndash;&gt;-->
+<!--            </TextArea>-->
+<!--        </AnchorPane>-->
+<!--    </SplitPane>-->
 </AnchorPane>

@@ -12,6 +12,6 @@ module com.williamoverflow.cmpt354yelpgui {
     exports com.williamoverflow.cmpt354yelpgui;
 
     exports com.williamoverflow.cmpt354yelpgui.entities;
-    exports com.williamoverflow.cmpt354yelpgui.filters;
+    exports com.williamoverflow.cmpt354yelpgui.functions;
 
 }

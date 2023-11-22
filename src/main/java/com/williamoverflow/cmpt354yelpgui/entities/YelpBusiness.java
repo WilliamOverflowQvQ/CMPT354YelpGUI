@@ -4,13 +4,42 @@ import java.sql.SQLException;
 
 public class YelpBusiness extends Entity {
     // Fields corresponding to the table columns
-    private String business_id;
-    private String name;
-    private String address;
-    private String city;
-    private String postal_code;
-    private int stars;
-    private int review_count;
+    public String business_id;
+    public String name;
+    public String address;
+    public String city;
+
+    public String postal_code;
+    public int stars;
+    public int review_count;
+
+    public String getBusiness_id() {
+        return business_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getPostal_code() {
+        return postal_code;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public int getReview_count() {
+        return review_count;
+    }
 
     // Constructor
     public YelpBusiness(String business_id, String name, String address, String city, String postal_code, int stars, int review_count) {

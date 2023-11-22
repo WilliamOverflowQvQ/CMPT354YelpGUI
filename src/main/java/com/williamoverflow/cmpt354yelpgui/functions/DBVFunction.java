@@ -1,35 +1,91 @@
-package com.williamoverflow.cmpt354yelpgui.filters;
+package com.williamoverflow.cmpt354yelpgui.functions;
 
+import java.lang.reflect.Type;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 
+import com.williamoverflow.cmpt354yelpgui.entities.YelpUser;
 import javafx.geometry.HPos;
-import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
 // This kind of class connect between abstract filter and UI filter (act like a tab)
-public class Filter {
-    public String filterName = "";
-    public List<FilterComponent> components = new ArrayList<>();
-    public Filter(String filterName){
-        this.filterName = filterName;
+public class DBVFunction {
+    public String funcName = "";
+    public String tblName = "";
+    public Type funcResult = null;
+    public List<DBVFuncComp> components = new ArrayList<>();
+    public FuncType type;
+    public DBVFunction(String funcName, String tblName, Type funcResult, FuncType type){
+        this.funcName = funcName;
+        this.tblName = tblName;
+        this.funcResult = funcResult;
+        this.type = type;
     }
 
-    public String getFinalFilterString(){
+    public void addComp(DBVFuncComp fc){
+        components.add(fc);
+    }
+
+
+    protected String getFinalFilterString(){
         StringBuilder ffstr = new StringBuilder();
+        ffstr.append("SELECT * FROM ");
+        ffstr.append(tblName).append(" ");
+        ffstr.append("WHERE 1 = 1 ");
         for (var fc : components) {
-            ffstr.append(fc.getFilterStringQuestioned());
+            ffstr.append(fc.getFunctionString());
         }
+        ffstr.append(";");
         return ffstr.toString();
     }
 
+    protected String getFinalEditorString(){
+        return "";
+    }
 
-    public Tab getDisplayFilterTab(){
-        Tab displayTab = new Tab(this.filterName);
+    public String getFinalFunctionString(){
+        if(this.type == FuncType.EDITOR){
+            return getFinalEditorString();
+        }else{
+            return getFinalFilterString();
+        }
+    }
 
-        SplitPane splitPane = new SplitPane();
+
+
+    protected void setFinalStatement(PreparedStatement statement) throws SQLException {
+        int statementVarIndex = 1;
+        for(int i = 0; i < this.components.size(); i++){
+            var fc = components.get(i);
+            if(fc.enabled.getValue()){
+                if(fc.type == DBVFuncComp.CompType.TEXT) {
+                    statement.setString(statementVarIndex, fc.userInput.getValue());
+                }else{
+                    statement.setObject(statementVarIndex, fc.userInput.getValue());
+                }
+                statementVarIndex++;
+            }
+        }
+    }
+
+    public ResultSet applyFunction(Connection connection) throws SQLException{
+        String sql = getFinalFunctionString();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        setFinalStatement(statement);
+
+        return statement.executeQuery();
+
+    }
+
+
+    public Tab getDisplayFunctionTab(){
+        Tab displayTab = new Tab(this.funcName);
 
         // Upper part: filter components:
         GridPane upperGrid = new GridPane();
@@ -54,6 +110,7 @@ public class Filter {
         upperGrid.add(enable_titleLbl, 0, 0);
         upperGrid.add(field_titleLbl, 1, 0);
         upperGrid.add(input_titleLbl, 2, 0);
+
         upperGrid.add(reverse_titleLbl, 3, 0);
         upperGrid.add(proxy_titleLbl, 4, 0);
 
@@ -88,23 +145,15 @@ public class Filter {
             GridPane.setHalignment(c, HPos.CENTER);
         }
 
-        // Bottom part (buttons)
-        GridPane bottomGrid = new GridPane();
-        Button applyBtn = new Button("APPLY");
-        applyBtn.setPrefSize(160, 20);
-
-
-        bottomGrid.add(applyBtn, 0, 0);
-
-        splitPane.getItems().addAll(upperGrid, bottomGrid);
-        splitPane.setOrientation(Orientation.VERTICAL);
-        displayTab.setContent(splitPane);
-
+        displayTab.setContent(upperGrid);
         return displayTab;
     }
 
 
-
+    public enum FuncType{
+        FILTER,
+        EDITOR,
+    }
 
 
 }

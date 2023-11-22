@@ -6,14 +6,14 @@ import java.util.Date;
 
 public class YelpReview extends Entity{
     // Fields corresponding to the table columns
-    private String review_id;
-    private String user_id;
-    private String business_id;
-    private int stars;
-    private int useful;
-    private int funny;
-    private int cool;
-    private Date date;
+    public String review_id;
+    public String user_id;
+    public String business_id;
+    public int stars;
+    public int useful;
+    public int funny;
+    public int cool;
+    public Date date;
 
     // Constructor
     public YelpReview(String review_id, String user_id, String business_id, int stars, int useful, int funny, int cool, Date date) {
