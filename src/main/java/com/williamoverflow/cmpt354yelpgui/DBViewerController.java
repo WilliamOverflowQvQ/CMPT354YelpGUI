@@ -17,6 +17,7 @@ public class DBViewerController {
 
 
     public BusinessFilter businessFilter = new BusinessFilter();
+    public TableView resultView;
 
     public DBViewerController(){
 
