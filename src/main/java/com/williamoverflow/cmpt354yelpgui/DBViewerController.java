@@ -3,15 +3,15 @@ package com.williamoverflow.cmpt354yelpgui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.sql.SQLException;
-
 import com.williamoverflow.cmpt354yelpgui.filters.*;
 
 
 public class DBViewerController {
-
+    @FXML
     public TabPane filterTabPane;
+    @FXML
     public TextArea resultsDisplay;
+    @FXML
     public TextArea errorMessageArea;
 
 
@@ -20,5 +20,9 @@ public class DBViewerController {
 
     public DBViewerController(){
 
+    }
+    @FXML
+    public void initialize(){
+        filterTabPane.getTabs().add(businessFilter.getDisplayFilterTab());
     }
 }

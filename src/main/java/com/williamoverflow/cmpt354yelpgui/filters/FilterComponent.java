@@ -1,5 +1,6 @@
 package com.williamoverflow.cmpt354yelpgui.filters;
 
+// FilterComponent in each filter
 public class FilterComponent {
     public boolean enabled = true;
     public boolean reverse = false; // when true ... NOT xxx ...
@@ -51,6 +52,7 @@ public class FilterComponent {
         res = "AND " + res;
         return res;
     }
+
 
     public String getFilterStringFilled(String input1, String input2){
         if(!this.enabled){

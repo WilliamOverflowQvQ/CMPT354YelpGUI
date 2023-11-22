@@ -44,6 +44,7 @@ public class LoginViewController {
         usernameField.setText("s_zza198");
         passwordField.setText("d4rHQtH4tM76En64");
         dbNameField.setText("zza198354");
+        sceneuserField.setText("J");
         encryptCheckBox.setSelected(false);
     }
 
@@ -146,6 +147,7 @@ public class LoginViewController {
             Stage stage = (Stage) loginBtn.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+
             stage.show();
         }catch (IOException ex){
 
