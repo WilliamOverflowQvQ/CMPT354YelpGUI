@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.lang.reflect.Type;
 
-// FilterComponent in each filter
+// SelectorComponent in each filter
 public class DBVFuncComp {
     public Property<Boolean> enabled = new SimpleBooleanProperty(true);     // when false, this filter comp will not work
     public Property<Boolean> reverse = new SimpleBooleanProperty(false);     // when true ... NOT xxx ...
@@ -16,6 +16,7 @@ public class DBVFuncComp {
     public Type valType = null;
     public boolean allowProxy = false;      // define whether this comp can have proxy
 
+    public boolean hidden = false;
     public CompType type = CompType.TEXT;   // type of this comp
 
     public String name = "";                // shown name in label
@@ -25,7 +26,7 @@ public class DBVFuncComp {
         this.name = name;
         this.sqlName = sqlName;
         this.valType = valType;
-        this.type = CompType.EDITOR;
+        this.type = CompType.INSERTER;
     }
 
     public DBVFuncComp(String name, String sqlName, Type valType, CompType type, boolean allowProxy){
@@ -37,7 +38,7 @@ public class DBVFuncComp {
     }
 
 
-    public String getFilterStringQuestioned(){
+    public String getSelectorStringQuestioned(){
         if(userInput.getValue().isEmpty()){
             this.enabled.setValue(false);
         }
@@ -48,7 +49,6 @@ public class DBVFuncComp {
 
         String res = "";
         switch(this.type){
-
             case TEXT -> {
                 res += "UPPER(" + sqlName + ") ";
                 res += this.proxyMatch.getValue() ? "LIKE UPPER(?) " : "= UPPER(?) ";
@@ -81,30 +81,38 @@ public class DBVFuncComp {
 
 
 
-    public String getEditorStringQuestioned(){
-        return "not implemented";
+    public String getInserterStringQuestioned(){
+        return this.sqlName + " ";
     }
 
     public String getFunctionString(){
-        if(this.type == CompType.EDITOR){
-            return getEditorStringQuestioned();
-        }else{
-            return getFilterStringQuestioned();
+        switch(this.type){
+            case TEXT, BETWEEN, VALUE, LARGER, SMALLER -> {
+                return getSelectorStringQuestioned();
+            }
+            case INSERTER -> {
+                return getInserterStringQuestioned();
+            }
+            case UPDATER -> {
+                return "";
+            }
         }
+        return "";
     }
 
     public enum CompType {
+        HIDDEN,
         TEXT,
         BETWEEN,
         VALUE,
         LARGER,
         SMALLER,
-        EDITOR,
-
+        INSERTER,
+        UPDATER,
     }
 
 //
-//    public String getFilterStringFilled(String input1, String input2){
+//    public String getSelectorStringFilled(String input1, String input2){
 //        if(!this.enabled.getValue()){
 //            return " ";
 //        }

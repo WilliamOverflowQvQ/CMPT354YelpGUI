@@ -77,7 +77,7 @@ public class YelpDBHelper {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                return YelpUser.map(resultSet);
+                return new YelpUser(resultSet);
             } else {
                 return null;
             }
@@ -91,7 +91,7 @@ public class YelpDBHelper {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                return YelpUser.map(resultSet);
+                return new YelpUser(resultSet);
             } else {
                 return null;
             }

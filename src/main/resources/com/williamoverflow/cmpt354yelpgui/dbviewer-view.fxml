@@ -46,35 +46,4 @@
 
 
     </SplitPane>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--    <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="600.0" prefWidth="516.0">-->
-<!--        &lt;!&ndash; Left Side: TabPane and Results Display &ndash;&gt;-->
-<!--        <VBox>-->
-<!--            &lt;!&ndash; TabPane for Filter Methods &ndash;&gt;-->
-<!--            <TabPane fx:id="filterTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabMaxHeight="0.0" tabMaxWidth="0.0">-->
-
-<!--            </TabPane>-->
-
-<!--        </VBox>-->
-
-<!--        &lt;!&ndash; Right Side: Error Message Display &ndash;&gt;-->
-<!--        <AnchorPane prefWidth="439.0">-->
-<!--            <TextArea fx:id="errorMessageArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">-->
-<!--                &lt;!&ndash; This area will display error messages &ndash;&gt;-->
-<!--            </TextArea>-->
-<!--        </AnchorPane>-->
-<!--    </SplitPane>-->
 </AnchorPane>

@@ -13,19 +13,19 @@ public class YelpFriendship extends Entity{
         this.friend = friend;
     }
 
-    // Getters and setters for each field
-    // ...
-
-    // Optionally, you can also override toString, equals, and hashCode methods
-    // ...
-    public static YelpFriendship map(ResultSet rs) throws SQLException {
-        if (rs == null) {
-            return null;
-        }
-
-        String user_id = rs.getString("user_id");
-        String friend = rs.getString("friend");
-
-        return new YelpFriendship(user_id, friend);
+    public YelpFriendship(ResultSet rs){
+        super(rs);
     }
+
+
+//    public static YelpFriendship map(ResultSet rs) throws SQLException {
+//        if (rs == null) {
+//            return null;
+//        }
+//
+//        String user_id = rs.getString("user_id");
+//        String friend = rs.getString("friend");
+//
+//        return new YelpFriendship(user_id, friend);
+//    }
 }

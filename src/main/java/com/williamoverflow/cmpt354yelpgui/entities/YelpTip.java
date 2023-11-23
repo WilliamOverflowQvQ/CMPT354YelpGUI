@@ -22,24 +22,21 @@ public class YelpTip extends Entity{
         this.compliment_count = compliment_count;
     }
 
-    // Getters and setters for each field
-    // ...
-
-    // Optionally, you can also override toString, equals, and hashCode methods
-    // ...
-
-
-    public static YelpTip mapResultSetToYelpTip(ResultSet rs) throws SQLException {
-        if (rs == null) {
-            return null;
-        }
-
-        int tip_id = rs.getInt("tip_id");
-        String user_id = rs.getString("user_id");
-        String business_id = rs.getString("business_id");
-        Date date = rs.getDate("date"); // Assumes 'date' is stored in a suitable format in the database
-        int compliment_count = rs.getInt("compliment_count");
-
-        return new YelpTip(tip_id, user_id, business_id, date, compliment_count);
+    public YelpTip(ResultSet rs){
+        super(rs);
     }
+
+//    public static YelpTip mapResultSetToYelpTip(ResultSet rs) throws SQLException {
+//        if (rs == null) {
+//            return null;
+//        }
+//
+//        int tip_id = rs.getInt("tip_id");
+//        String user_id = rs.getString("user_id");
+//        String business_id = rs.getString("business_id");
+//        Date date = rs.getDate("date"); // Assumes 'date' is stored in a suitable format in the database
+//        int compliment_count = rs.getInt("compliment_count");
+//
+//        return new YelpTip(tip_id, user_id, business_id, date, compliment_count);
+//    }
 }
