@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 
 import com.williamoverflow.cmpt354yelpgui.functions.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 //import org.controlsfx.control.tableview2.TableView2;
 
 import java.lang.reflect.Constructor;
@@ -34,6 +35,8 @@ public class DBViewerController {
     public Button resetBtn;
     @FXML
     public TextArea statTxt;
+    @FXML
+    public TextArea resultStrTxt;
 
 
     public List<Entity> L_DisplayEntities = null;
@@ -99,6 +102,7 @@ public class DBViewerController {
 
         try {
             if(DBVSelector.class.isAssignableFrom(currentFunction.getClass())) {
+                resultStrTxt.setText("Unknown Internal Exception");
                 DBVSelector current = (DBVSelector) currentFunction;
                 var rs = current.applySelector(YelpDBHelper.ydbh.connection, null);
                 Class c = current.resultType;
@@ -109,15 +113,22 @@ public class DBViewerController {
                     L_DisplayEntities.add(e);
                 }
                 setUpTableView(displayTableView, currentFunction.resultType, L_DisplayEntities);
+                resultStrTxt.setText("Returned " + L_DisplayEntities.size() + " rows");
             }
             if(DBVInserter.class.isAssignableFrom(currentFunction.getClass())) {
+                resultStrTxt.setText("Unknown Internal Exception");
                 DBVInserter current = (DBVInserter) currentFunction;
                 int arc = current.applyInserter(YelpDBHelper.ydbh.connection, YelpDBHelper.ydbh.sceneUser);
                 System.err.println("Affected " + arc + " rows");
+                resultStrTxt.setText("Affected " + arc + " rows");
             }
 
 
         }catch (SQLException ex){
+            String exMsg = "";
+            exMsg += "Excepted SQL Exception:\n";
+            exMsg += ex.getMessage();
+            resultStrTxt.setText(exMsg);
             // TODO: If user entered an invalid number,
             // such as average_stars larger than 5,
             // it will cause Arithmetic overflow error
@@ -130,12 +141,30 @@ public class DBViewerController {
     private <T extends Entity> void setUpTableView(TableView<T> tableView, Class resultType, List<T> data) {
 
         ObservableList<T> observableData = FXCollections.observableArrayList(data);
+        tableView.getSelectionModel().setCellSelectionEnabled(true);
         tableView.setItems(observableData);
         tableView.getColumns().clear();
         for (Field field : resultType.getDeclaredFields()) {
             TableColumn<T, String> column = new TableColumn<>(field.getName());
             column.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
+
+//            column.setCellFactory(tc -> {
+//                TableCell<String, ?> cell = new TableCell<>();
+//                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+//                    if (!cell.isEmpty()) {
+//                        String item = (String)cell.getItem();
+//                        // 这里的item是被点击单元格的值
+//                        // 处理item...
+//                    }
+//                });
+//                return cell;
+//            });
+
+
+
             tableView.getColumns().add(column);
+
+
         }
     }
 

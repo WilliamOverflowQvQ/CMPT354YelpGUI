@@ -26,7 +26,7 @@ public class WriteReviewInserter extends DBVInserter{
 
     @Override
     public int applyInserter(Connection connection, Object params) throws SQLException {
-        review_idComp.userInput.setValue("12345678");   //TODO: Remove debug settings
+//        review_idComp.userInput.setValue("12345678");   //TODO: Remove debug settings
         if(params != null){
             YelpUser sceneUser = (YelpUser)params;
             this.user_idComp.userInput.setValue(sceneUser.getUser_id());
