@@ -15,6 +15,7 @@ public class DBVFuncComp {
     public Property<String> userInput = new SimpleStringProperty("");     // user input txt will be here
     public Type valType = null;
     public boolean allowProxy = false;      // define whether this comp can have proxy
+    public boolean allowEdit = true;
 
     public boolean hidden = false;
     public CompType type = CompType.TEXT;   // type of this comp

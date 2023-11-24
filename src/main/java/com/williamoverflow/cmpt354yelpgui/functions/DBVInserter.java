@@ -10,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBVInserter extends DBVFunction {
-    public DBVInserter(String funcName, String tblName, Class resultType, FuncType type) {
-        super(funcName, tblName, resultType, type);
+    public DBVInserter(String funcName, String tblName) {
+        super(funcName, tblName, null, FuncType.INSERTER);
     }
 
     protected void setFinalStatement(PreparedStatement statement) throws SQLException {

@@ -3,23 +3,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import org.controlsfx.control.tableview2.TableView2?>
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.williamoverflow.cmpt354yelpgui.DBViewerController">
+<AnchorPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.williamoverflow.cmpt354yelpgui.DBViewerController">
 
     <SplitPane dividerPositions="0.5" orientation="HORIZONTAL">
         <SplitPane dividerPositions="0.5" maxWidth="350.0" minWidth="350.0" orientation="VERTICAL" prefWidth="350.0">
             <TabPane fx:id="funcTabPane">
 
             </TabPane>
-            <AnchorPane>
-                <TextArea fx:id="finSqlStrTxt" prefHeight="320.0" prefWidth="300.0" />
-            </AnchorPane>
+            <GridPane vgap="5" hgap="5">
+                <Label text="Final SQL statement:" GridPane.rowIndex="1"/>
+                <TextArea fx:id="finSqlStrTxt" GridPane.rowIndex="2" editable="false" wrapText="true" />
+                <Label text="Result or Exception:" GridPane.rowIndex="4"/>
+                <TextArea fx:id="resultStrTxt" GridPane.rowIndex="5" editable="false" wrapText="true"/>
+            </GridPane>
         </SplitPane>
         <SplitPane dividerPositions="0.5" maxWidth="850.0" minWidth="850.0" orientation="VERTICAL">
             <SplitPane dividerPositions="0.5" orientation="HORIZONTAL">
                 <GridPane hgap="20" vgap="20">
                     <TextArea editable="false" prefHeight="150.0" />
-                    <Button fx:id="applyBtn" prefWidth="90.0" text="APPLY" onMouseClicked="#onApplyClick" GridPane.rowIndex="1" />
+                    <Button fx:id="applyBtn" onMouseClicked="#onApplyClick" prefWidth="90.0" text="APPLY" GridPane.rowIndex="1" />
                     <Button fx:id="resetBtn" prefWidth="90.0" text="RESET" GridPane.rowIndex="2" />
                <columnConstraints>
                   <ColumnConstraints />

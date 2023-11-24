@@ -37,12 +37,15 @@ public class DBViewerController {
 
 
     public List<Entity> L_DisplayEntities = null;
+    public List<DBVFunction> L_FuncTabFunctions = new ArrayList<>();
 
 
     public BusinessSearchSelector businessSearchSelector = new BusinessSearchSelector();
     public UserSearchSelector userSearchSelector = new UserSearchSelector();
 
     public WriteReviewInserter writeReviewInserter = new WriteReviewInserter();
+    public MakeFriendshipInserter makeFriendshipInserter = new MakeFriendshipInserter();
+
     public DBVFunction currentFunction = null;
 
     public DBViewerController(){
@@ -50,23 +53,40 @@ public class DBViewerController {
     }
     @FXML
     public void initialize(){
-        funcTabPane.getTabs().add(businessSearchSelector.getDisplayTab());
-        funcTabPane.getTabs().add(userSearchSelector.getDisplayTab());
-        funcTabPane.getTabs().add(writeReviewInserter.getDisplayTab());
-        this.currentFunction = businessSearchSelector;
+//        funcTabPane.getTabs().add(businessSearchSelector.getDisplayTab());
+//        funcTabPane.getTabs().add(userSearchSelector.getDisplayTab());
+//        funcTabPane.getTabs().add(writeReviewInserter.getDisplayTab());
+//        funcTabPane.getTabs().add((makeFriendshipInserter.getDisplayTab()));
+        addToFuncTabPane(new BusinessSearchSelector());
+        addToFuncTabPane(new UserSearchSelector());
+        addToFuncTabPane(new WriteReviewInserter());
+        addToFuncTabPane(new MakeFriendshipInserter());
+
+        this.currentFunction = L_FuncTabFunctions.get(0);
 
         funcTabPane.getSelectionModel().selectedItemProperty().addListener(this::onFuncTabSelectionChanged);
 
     }
 
+    public void addToFuncTabPane(DBVFunction dbvFunc){
+        L_FuncTabFunctions.add(dbvFunc);
+        funcTabPane.getTabs().add(dbvFunc.getDisplayTab());
+    }
+
 
     public void onFuncTabSelectionChanged(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
-        if(newTab == businessSearchSelector.displayTab)
-            currentFunction = businessSearchSelector;
-        if(newTab == userSearchSelector.displayTab)
-            currentFunction = userSearchSelector;
-        if(newTab == writeReviewInserter.displayTab)
-            currentFunction = writeReviewInserter;
+        for(var ctab : L_FuncTabFunctions){
+            if(newTab == ctab.getDisplayTab()){
+                currentFunction = ctab;
+            }
+        }
+
+//        if(newTab == businessSearchSelector.displayTab)
+//            currentFunction = businessSearchSelector;
+//        if(newTab == userSearchSelector.displayTab)
+//            currentFunction = userSearchSelector;
+//        if(newTab == writeReviewInserter.displayTab)
+//            currentFunction = writeReviewInserter;
     }
 
     @FXML

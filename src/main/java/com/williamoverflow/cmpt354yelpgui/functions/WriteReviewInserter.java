@@ -15,7 +15,7 @@ public class WriteReviewInserter extends DBVInserter{
     public DBVFuncComp user_idComp = new DBVFuncComp("user_id", "user_id", String.class, DBVFuncComp.CompType.INSERTER, false);
 //    public DBVFuncComp dateComp = new DBVFuncComp("date", "date", Date.class, DBVFuncComp.CompType.INSERTER, false);
     public WriteReviewInserter() {
-        super("Review Insert", "review", YelpReview.class, FuncType.INSERTER);
+        super("Review Insert", "review");
         addComp(new DBVFuncComp("Business ID", "business_id", String.class));
         addComp(new DBVFuncComp("Review Stars", "stars", int.class));
         addComp(review_idComp);
